@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import waait from 'waait'
+import nameless from '@/utils/nameless'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -115,7 +116,7 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
-  await waait(30000)
+  await nameless(waait(30000))
 
   return {
     props: {},
