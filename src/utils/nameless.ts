@@ -1,20 +1,25 @@
-// interface Nameless {
-//   fn: Function
-//   duration?: number
-// }
+// Define an interface for the function that will be passed as an argument to nameless
+interface AsyncFunction<T> {
+  (): Promise<T>
+}
 
-const nameless = async (fn: Promise<void>, duration = 20) => {
-  // const { fn, duration = 20 } = params
+// Define the type for the nameless function
+type NamelessFunction<T> = (
+  fn: AsyncFunction<T>,
+  duration?: number
+) => Promise<T>
 
-  if (fn instanceof Function) {
-    const timeout = setTimeout(() => {
-      throw new Error('Erro de timeout de fetch')
-    }, duration * 1000)
+// Define the nameless function
+const nameless: NamelessFunction<any> = async (fn, duration = 5) => {
+  const timeout = setTimeout(() => {
+    throw new Error('Fetch timeout error')
+  }, duration * 1000)
 
-    const data = await fn()
-    clearTimeout(timeout)
-    return data
-  }
+  console.log('aqio')
+
+  const data = await fn()
+  clearTimeout(timeout)
+  return data
 }
 
 export default nameless
