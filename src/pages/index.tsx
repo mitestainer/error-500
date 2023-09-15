@@ -116,10 +116,11 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
-  //@ts-ignore
-  await nameless(waait(30000))
+  try {
+    await nameless(() => waait(30000))
 
-  return {
-    props: {},
-  }
+    return {
+      props: {},
+    }
+  } catch (error) {}
 }
